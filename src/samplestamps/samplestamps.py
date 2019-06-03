@@ -4,7 +4,7 @@ glossary:
     densely stamped - each sample is consecutively time stamped
     sparsely stamped - only selected samples are time stamped - need to provide sample numbers
 """
-from utils import monotonize, interpolator, ismonotonous
+from .utils import monotonize, interpolator, ismonotonous
 
 
 class SampStamp():

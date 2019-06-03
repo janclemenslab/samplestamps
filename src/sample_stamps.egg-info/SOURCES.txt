@@ -1,0 +1,11 @@
+README.md
+setup.py
+src/sample_stamps.egg-info/PKG-INFO
+src/sample_stamps.egg-info/SOURCES.txt
+src/sample_stamps.egg-info/dependency_links.txt
+src/sample_stamps.egg-info/not-zip-safe
+src/sample_stamps.egg-info/requires.txt
+src/sample_stamps.egg-info/top_level.txt
+src/samplestamps/__init__.py
+src/samplestamps/samplestamps.py
+src/samplestamps/utils.py

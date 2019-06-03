@@ -1,0 +1,16 @@
+Metadata-Version: 2.1
+Name: sample-stamps
+Version: 0.2
+Summary: samplestamps
+Home-page: http://github.com/janclemenslab/samplestamps
+Author: Jan Clemens
+Author-email: clemensjan@googlemail.com
+License: MIT
+Description: code for converting between time stamps and samples/frames
+        
+        todo:
+        [ ] test
+        [ ] usage examples (time from cycles, time from log, general usage of the object)
+        
+Platform: UNKNOWN
+Description-Content-Type: text/markdown
