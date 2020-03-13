@@ -2,6 +2,7 @@
 import numpy as np
 import operator as op
 from datetime import datetime
+import scipy.interpolate
 
 
 def ismonotonous(x, direction='increasing', strict=True):
@@ -57,7 +58,6 @@ def monotonize(x, direction='increasing', strict=True):
 
 
 def interpolator(x, y, fill_value='extrapolate'):
-    import scipy.interpolate
     return scipy.interpolate.interp1d(x, y, fill_value=fill_value)
 
 

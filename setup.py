@@ -7,7 +7,7 @@ with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(name='sample stamps',
-      version='0.2',
+      version='0.2.0',
       description='samplestamps',
       long_description=long_description,
       long_description_content_type="text/markdown",
