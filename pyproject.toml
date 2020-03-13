@@ -10,5 +10,5 @@ author-email = "clemensjan@googlemail.com"
 home-page = "https://github.com/postpop/samplestamps"
 classifiers = ["License :: OSI Approved :: MIT License"]
 requires-python = ">=3.5"
-requires = ['numpy']
+requires = ['numpy', 'scipy']
 description-file = "README.md"

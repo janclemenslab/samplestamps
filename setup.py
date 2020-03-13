@@ -7,7 +7,7 @@ with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(name='sample stamps',
-      version='0.2.0',
+      version='0.2.1',
       description='samplestamps',
       long_description=long_description,
       long_description_content_type="text/markdown",
@@ -17,7 +17,7 @@ setup(name='sample stamps',
       license='MIT',
       packages=find_packages('src'),
       package_dir={'': 'src'},
-      install_requires=['numpy'],
+      install_requires=['numpy', 'scipy'],
       include_package_data=True,
       zip_safe=False
       )

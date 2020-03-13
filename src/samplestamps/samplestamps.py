@@ -64,6 +64,7 @@ class SampStamp():
 
 def test():
     # test cases:
+    import numpy as np
     inc_strict = np.array([0, 1, 2, 3])
     inc_nonstrict = np.array([0, 1, 2, 2])
     dec_strict = inc_strict[::-1]
