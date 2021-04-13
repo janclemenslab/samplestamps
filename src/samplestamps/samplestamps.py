@@ -78,6 +78,24 @@ def test():
     assert ismonotonous(np.array([1]), direction='increasing' , strict=True)==True
     assert ismonotonous(np.array([1]), direction='increasing' , strict=False)==True
 
+    x = np.array([0, 1, 2, 3, 4])
+    print(f"montonize {x}")
+    print(f"  strict, inc: {monotonize(x)}")
+    assert np.all(monotonize(x)==[0,1,2,3,4])
+    print(f"  strict, dec: {monotonize(x, direction='decreasing')}")
+    assert np.all(monotonize(x, direction='decreasing')==[0])
+    print(f"  nonstrict, in: {monotonize(x, strict=False)}")
+    assert np.all(monotonize(x, strict=False)==[0,1,2,3,4])
+
+    x = np.array([4, 3, 2, 1, 0])
+    print(f"montonize {x}")
+    print(f"  strict, inc: {monotonize(x)}")
+    assert np.all(monotonize(x)==[4])
+    print(f"  strict, dec: {monotonize(x, direction='decreasing')}")
+    assert np.all(monotonize(x, direction='decreasing')==[4,3,2,1,0])
+    print(f"  nonstrict, in: {monotonize(x, strict=False)}")
+    assert np.all(monotonize(x, strict=False)==[4])
+
     x = np.array([0, 1, 2, 2, 1])
     print(f"montonize {x}")
     print(f"  strict, inc: {monotonize(x)}")

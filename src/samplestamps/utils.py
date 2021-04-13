@@ -50,9 +50,14 @@ def monotonize(x, direction='increasing', strict=True):
         comp_op = op.lt  # >
 
     if direction == 'decreasing':
-        last_idx = np.argmax(comp_op(x[:-1], x[1:])) + 1
+        comp = comp_op(x[:-1], x[1:])
     else:
-        last_idx = np.argmax(comp_op(x[1:], x[:-1])) + 1
+        comp = comp_op(x[1:], x[:-1])
+
+    if np.all(~comp):
+        last_idx = len(comp) + 1
+    else:
+        last_idx = np.argmax(comp) + 1
 
     return x[:last_idx]
 
