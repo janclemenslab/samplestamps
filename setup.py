@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 import os
 import codecs
 import re
@@ -27,7 +27,7 @@ with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 
 setup(name='sample stamps',
-    version=find_version("src/samplestamps/src/samplestamps/__init__.py"),
+    version=find_version("src/samplestamps/__init__.py"),
     description='samplestamps',
     long_description=long_description,
     long_description_content_type="text/markdown",
