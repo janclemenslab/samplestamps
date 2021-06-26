@@ -10,7 +10,9 @@ from .utils import monotonize, interpolator, ismonotonous
 class SampStamp():
     """Converts between frames and samples."""
 
-    def __init__(self, sample_times, frame_times, sample_numbers=None, frame_numbers=None, sample_times_offset=0, frame_times_offset=0, auto_monotonize=True):
+    def __init__(self, sample_times, frame_times=None, sample_numbers=None, frame_numbers=None, frame_samples=None,
+                 sample_times_offset=0, frame_times_offset=0,
+                 auto_monotonize=True):
         """Get converter.
 
         Args:
@@ -18,32 +20,60 @@ class SampStamp():
             frame_times(np.ndarray)
             sample_number(np.ndarray)
             frame_number(np.ndarray)
+            frame_samples
             sample_times_offset(float)
             frame_times_offset(float)
             auto_monotonize(bool)
         """
+        # we want:
+        # samples -> frames
+        # samples -> times
+        # frames -> samples
+        # frames -> times
+
+        # we need:
+        # (samples, times) from DAQ, (frames, times) from video timestamps
+        # (samples, times) from DAQ, (samples, frames) from movieframes
+        # (samples, frames) from movieframes, (frames, times) from video timestamps (ignore edge case)
 
         # generate dense x_number arrays
-        if sample_numbers is None:
+        if sample_numbers is None and sample_times is not None:
             sample_numbers = range(sample_times.shape[0])
-        if frame_numbers is None:
+        if frame_numbers is None and frame_times is not None:
             frame_numbers = range(frame_times.shape[0])
 
         # correct for offsets
         sample_times += sample_times_offset
-        frame_times += frame_times_offset
+        if frame_times is not None:
+            frame_times += frame_times_offset
 
         if auto_monotonize:
-            sample_times = monotonize(sample_times)
-            sample_numbers = sample_numbers[:sample_times.shape[0]]
-            frame_times = monotonize(frame_times)
-            frame_numbers = frame_numbers[:frame_times.shape[0]]
+            if sample_times is not None:
+                sample_times = monotonize(sample_times)
+                sample_numbers = sample_numbers[:sample_times.shape[0]]
+            if frame_times is not None:
+                frame_times = monotonize(frame_times)
+                frame_numbers = frame_numbers[:frame_times.shape[0]]
+            if frame_samples is not None:
+                frame_samples = monotonize(frame_samples)
+                # frame_numbers = frame_numbers[:frame_times.shape[0]]
 
         # get all interpolators for re-use
-        self.samples2times = interpolator(sample_numbers, sample_times)
-        self.frames2times = interpolator(frame_numbers, frame_times)
-        self.times2samples = interpolator(sample_times, sample_numbers)
-        self.times2frames = interpolator(frame_times, frame_numbers)
+        if sample_numbers is not None and sample_times is not None:
+            self.samples2times = interpolator(sample_numbers, sample_times)
+        if frame_times is None and frame_samples is not None:
+            frame_times = self.samples2times(frame_samples)
+            # self.frame_times = self.samples2times(frame_samples)
+
+        if frame_numbers is not None and frame_times is not None:
+            self.frames2times = interpolator(frame_numbers, frame_times)
+        if frame_times is not None and sample_numbers is not None:
+            self.times2samples = interpolator(sample_times, sample_numbers)
+        if frame_times is not None and frame_numbers is not None:
+            self.times2frames = interpolator(frame_times, frame_numbers)
+
+        if frame_samples is not None:
+            self.samples2frames = interpolator(frame_samples, frame_numbers, fill_value='extrapolate')
 
     def frame(self, sample):
         """Get frame number from sample number."""
@@ -77,24 +107,6 @@ def test():
     assert ismonotonous(dec_nonstrict, direction='decreasing' , strict=True)==False
     assert ismonotonous(np.array([1]), direction='increasing' , strict=True)==True
     assert ismonotonous(np.array([1]), direction='increasing' , strict=False)==True
-
-    x = np.array([0, 1, 2, 3, 4])
-    print(f"montonize {x}")
-    print(f"  strict, inc: {monotonize(x)}")
-    assert np.all(monotonize(x)==[0,1,2,3,4])
-    print(f"  strict, dec: {monotonize(x, direction='decreasing')}")
-    assert np.all(monotonize(x, direction='decreasing')==[0])
-    print(f"  nonstrict, in: {monotonize(x, strict=False)}")
-    assert np.all(monotonize(x, strict=False)==[0,1,2,3,4])
-
-    x = np.array([4, 3, 2, 1, 0])
-    print(f"montonize {x}")
-    print(f"  strict, inc: {monotonize(x)}")
-    assert np.all(monotonize(x)==[4])
-    print(f"  strict, dec: {monotonize(x, direction='decreasing')}")
-    assert np.all(monotonize(x, direction='decreasing')==[4,3,2,1,0])
-    print(f"  nonstrict, in: {monotonize(x, strict=False)}")
-    assert np.all(monotonize(x, strict=False)==[4])
 
     x = np.array([0, 1, 2, 2, 1])
     print(f"montonize {x}")
