@@ -7,7 +7,7 @@ dist-name = "samplestamps"
 module = "samplestamps"
 author = "Jan Clemens"
 author-email = "clemensjan@googlemail.com"
-home-page = "https://github.com/postpop/samplestamps"
+home-page = "https://github.com/janclemenslab/samplestamps"
 classifiers = ["License :: OSI Approved :: MIT License"]
 requires-python = ">=3.5"
 requires = ['numpy', 'scipy']
