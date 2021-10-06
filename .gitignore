@@ -126,13 +126,7 @@ demo
 !/*.toml
 !/*.gitignore
 !/.github
+!/conda
 src/*.egg-info/
-# src/sample_stamps.egg-info/PKG-INFO
-# src/sample_stamps.egg-info/SOURCES.txt
-# src/sample_stamps.egg-info/top_level.txt
 src/*.egg-info
-# src/sample_stamps.egg-info/dependency_links.txt
-# src/sample_stamps.egg-info/not-zip-safe
-# src/sample_stamps.egg-info/PKG-INFO
-# src/sample_stamps.egg-info/SOURCES.txt
-# src/sample_stamps.egg-info/top_level.txt
+

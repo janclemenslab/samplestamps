@@ -1,0 +1,44 @@
+{% set data = load_setup_py_data(setup_file='../../setup.py', from_recipe_dir=True) %}
+{% set name = "samplestamps" %}
+{% set version = data.get('version') %}
+
+package:
+  name: pyvideoreader
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - python
+    - pip
+    - numpy
+    - scipy
+    - git
+  run:
+    - python
+    - pip
+    - numpy
+    - scipy
+    - git
+
+test:
+  imports:
+    - videoreader
+
+about:
+  home: "https://github.com/janclemenslab/samplestamps"
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: "Convert timestamps."
+  doc_url: "https://github.com/janclemenslab/samplestamps"
+  dev_url: "https://github.com/janclemenslab/samplestamps"
+
+extra:
+  recipe-maintainers:
+    - postpop
