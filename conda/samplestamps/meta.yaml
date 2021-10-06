@@ -3,7 +3,7 @@
 {% set version = data.get('version') %}
 
 package:
-  name: pyvideoreader
+  name: samplestamps
   version: "{{ version }}"
 
 source:
@@ -28,7 +28,7 @@ requirements:
 
 test:
   imports:
-    - videoreader
+    - samplestamps
 
 about:
   home: "https://github.com/janclemenslab/samplestamps"
