@@ -11,13 +11,14 @@ source:
 
 build:
   number: 0
+  noarch: python
+  script: python -m pip install --no-deps --ignore-installed .
 
 requirements:
   host:
     - python {{ python }}
-    - numpy>1.20
-    - scipy
     - pip
+    - flit
   run:
     - python {{ python }}
     - numpy>1.20
