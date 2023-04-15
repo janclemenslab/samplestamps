@@ -129,4 +129,5 @@ demo
 !/conda
 src/*.egg-info/
 src/*.egg-info
-
+!/build_env.yml
+!/condarc.yml
