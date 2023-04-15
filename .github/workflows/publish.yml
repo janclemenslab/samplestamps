@@ -46,4 +46,3 @@ jobs:
         conda mambabuild conda/samplestamps -c conda-forge --python ${{ matrix.python-version }} --user ncb --token $ANACONDA_TOKEN
       env:
         ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
-        DA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
