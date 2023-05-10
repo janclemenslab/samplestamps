@@ -66,6 +66,19 @@ def interpolator(x, y, fill_value='extrapolate'):
     return scipy.interpolate.interp1d(x, y, fill_value=fill_value)
 
 
+class SampleInterpolator():
+    """For samples on a regular grid"""
+
+    def __init__(self, sampling_rate: float):
+        self.sampling_rate = float(sampling_rate)
+        # dummy values for compatibililty with Interpolators from scipy.interpolate
+        self.x = np.array([0.0, 1.0])
+        self.y = self.x / self.sampling_rate
+
+    def __call__(self, sample_numbers):
+        return np.asarray(sample_numbers) / self.sampling_rate
+
+
 def time_from_log(logfilename, line_number=1):
     """Parse time stamp from a specified lines in a log file.
 
