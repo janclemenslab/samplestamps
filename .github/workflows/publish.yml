@@ -1,4 +1,4 @@
-name: Publish to PyPI and Anaconda.org
+name: Publish Anaconda.org
 
 on:
   release:
