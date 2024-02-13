@@ -8,5 +8,5 @@ dependencies:
   - boa
   - conda-build
   - conda-verify
-  - pip
+  - pip>=23
   - git
