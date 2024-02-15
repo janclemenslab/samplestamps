@@ -18,6 +18,7 @@ requirements:
   host:
     - python {{ python }}
     - pip>=23
+    - flit
     - scipy
   run:
     - python {{ python }}
