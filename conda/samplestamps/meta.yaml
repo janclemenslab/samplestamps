@@ -18,13 +18,9 @@ requirements:
   host:
     - python {{ python }}
     - pip>=23
-    - flit
-    - libffi
-    - numpy>1.20
     - scipy
   run:
     - python {{ python }}
-    - numpy>1.20
     - scipy
 
 test:
