@@ -19,6 +19,7 @@ requirements:
     - python {{ python }}
     - pip>=23
     - flit
+    - libffi
   run:
     - python {{ python }}
     - numpy>1.20
