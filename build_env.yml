@@ -3,7 +3,7 @@ channels:
   - conda-forge
 dependencies:
   - anaconda-client
-  - boa
+  # - boa
   - conda-build
   - conda-verify
   - pip
